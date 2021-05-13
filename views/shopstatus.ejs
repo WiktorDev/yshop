@@ -1,0 +1,25 @@
+
+    <link rel="stylesheet" href="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/css/mdb.min.css" />
+    <title>Status</title>
+<center>
+<div style="margin-left: 4cm; margin-right: 4cm; margin-top: 7cm;">
+    <% if (messages.error) { %>
+        <h1>Administrator tego sklepu chwilowo wyłączył ten sklep z powodu:</h1>
+        <br>
+        <hr>
+        <div class="alert alert-danger" role="alert" >
+            <%- messages.error %>
+          </div>
+        <% } %>
+      
+      
+        <% if (messages.success) { %>
+            <h1>Sukces!</h1>
+            <br>
+            <hr>
+            <div class="alert alert-success" role="alert">
+                <%- messages.success %>
+              </div>
+          <% } %>
+</div>
+</center>

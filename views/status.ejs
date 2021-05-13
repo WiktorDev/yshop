@@ -1,0 +1,47 @@
+
+    <link rel="stylesheet" href="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/css/mdb.min.css" />
+    <title>Status</title>
+<center>
+<div style="margin-left: 4cm; margin-right: 4cm; margin-top: 7cm;">
+    <% if (messages.error) { %>
+        <h1>Wystąpił błąd!</h1>
+        <br>
+        <hr>
+        <div class="alert alert-danger" role="alert" >
+            <%- messages.error %>
+          </div>
+        <% } %>
+      
+      
+        <% if (messages.success) { %>
+            <h1>Sukces!</h1>
+            <br>
+            <hr>
+            <div class="alert alert-success" role="alert">
+                <%- messages.success %>
+              </div>
+          <% } %>
+
+          <% if (messages.redirect || messages.redirect2) { %>
+            <h1>Realizacja płatności...</h1>
+            <title>Płatność</title>
+            <br>
+            <hr>
+            <script>
+                time = 5
+                setInterval(function(){
+                    if(time < 1){
+                        window.location.replace("<%- messages.redirect %>")
+                    } else {
+                        time = time - 1
+                    }
+                    document.getElementById("timer").innerHTML = time;
+                }, 1000)
+                
+            </script>
+            <div class="alert alert-success" role="alert">
+                <%- messages.redirect2 %>
+              </div>
+          <% } %>
+</div>
+</center>

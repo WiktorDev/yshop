@@ -1,0 +1,41 @@
+<%- include('includes/sidebar1'); -%>
+    <div class="card" style="width: 70rem; margin-left: 14cm; margin-top: 6cm;">
+      <div class="card-body">
+        <table class="table" >
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nazwa</th>
+              <th scope="col">ID</th>
+              <th scope="col">Status</th>
+              <th scope="col">Akcja</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% rows.forEach(function(rows) { %>
+                <tr>
+                <td>1</td>
+                <td><%= rows.title %></td>
+                <td><%= rows.id %></td>
+                <% if (rows.status == 'true'){ %>
+                  <td><span class="badge bg-success">Aktywny</span></td>
+                  <% }else{ %>
+                    <td><span class="badge bg-danger">Wygasl</span></td>
+                    <% } %>
+                    <!--- <td><button class="btn btn-danger"><i class="fas fa-trash"></i></button> </td> -->
+                    <td><a href="/shop/manage/<%= rows.id %>" class="btn btn-primary">zarzadzaj</a></td>
+              </tr>
+                  <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+      </div>
+        <button id="toggler"class="btn btn-dark mt-5"data-toggle="sidenav"data-target="#full-screen-example">
+          <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    <script type="text/javascript" src="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/js/mdb.min.js"></script>
+  </body>
+</html>

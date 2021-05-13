@@ -1,0 +1,47 @@
+{
+  "name": "nodejs-mysql-login-and-signup",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mustafa05deniz/nodejs-mysql-login-and-signup.gitt"
+  },
+  "keywords": [
+    "1"
+  ],
+  "author": "1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mustafa05deniz/nodejs-mysql-login-and-signup.git"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "discord-webhook-node": "^1.1.8",
+    "dotenv": "^9.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.1",
+    "json-socket": "*",
+    "librcon": "^1.0.3",
+    "lvlup-js": "^0.1.3",
+    "minecraft-server-util": "^3.5.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "nodemailer": "^6.6.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "socket.io": "*",
+    "sweet-logger": "^1.0.2",
+    "uuid4": "^2.0.2"
+  }
+}

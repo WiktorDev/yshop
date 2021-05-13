@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="/modal.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<link rel="stylesheet" href="<%= scss %>">
+<meta name="description" content="<%= desc %>">
+<title><%= stitle %></title>
+<style>
+	.card {
+	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	  transition: 0.3s;
+
+	  width: 40%;
+	}
+	
+	.card:hover {
+	  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	}
+	
+	.container {
+	  padding: 2px 16px;
+	}
+	</style>
+<body>
+	<center>
+		<h1><%= sname %></h1>
+		<div class="card" style="margin-bottom: 2cm;" >
+			<div class="container">
+	
+			  <h4><b>Status serwera</b></h4> 
+			  <p>Status: </p>
+			  <p>Gracze online: <%= status %>/100</p>
+			</div>
+		</div>
+	
+			<% rows1.forEach(function(rows1) { %>
+				<div class="card" style="margin-bottom: 40px;">
+					<div class="container">
+						<img src="<%= rows1.image %>" alt="">
+					  <h4><b><%= rows1.name %></b></h4> 
+					  <p><%= rows1.lore %></p>
+					  <p><%= rows1.pid %></p>
+					  <input class="modal-btn" type="checkbox" id="<%= rows1.name %>" name="<%= rows1.name %>"/>
+
+					  <label for="<%= rows1.name %>">Kup </label>
+					  <div class="modal">		
+						<div class="modal-wrap">	
+						  <img src="<%= rows1.image %>" alt="">	
+							<p><%= rows1.lore %></p>
+		
+							<form action="" method="POST">
+								<input class="modal-btn" type="hidden" id="<%= rows1.name %>form" name="test" value="<%= rows1.name %>"/>
+								<input class="modal-btn" type="hidden" id="<%= rows1.name %>form1" name="pid" value="<%= rows1.pid %>"/>
+								<input class="modal-btn" type="text" id="<%= rows1.name %>form" name="pay" placeholder="nick"/>
+								<% if(rows1.type == 'suwak'){ %>
+									<input type="range" id="count" name="count"
+									min="<%= rows1.mincount %>" max="<%= rows1.maxcount %>">
+									<label for="count">Ilość</label>
+								<% }else{ %>
+
+								<% } %>
+								<button type="submit" class="button">Platnosc</button>
+							</form>  	
+						</div>			          		
+					   </div>	 
+					</div>
+				  </div>
+			 <% }); %>
+		 <br>
+		 <br>
+		 <br><br>
+		 <br>
+		 <br>
+		 <br>
+	</center>
+</body>
+
+

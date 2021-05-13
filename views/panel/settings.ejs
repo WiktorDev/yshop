@@ -1,0 +1,309 @@
+<%- include('includes/sidebar'); -%>
+    <script>
+      var notyf = new Notyf();
+  </script>
+  <% if (messages.error) { %>
+    <script>
+      notyf.error({
+          message: '<%- messages.error %>',
+          dismissible: true,
+          position: {
+            x: 'right',
+            y: 'top',
+          },
+      }) 
+      </script>
+    <% } %>
+    <% if (messages.success) { %>
+      <script>
+        notyf.success({
+            message: '<%- messages.success %>',
+            dismissible: true,
+            position: {
+              x: 'right',
+              y: 'top',
+            },
+        }) 
+        </script>
+      <% } %>
+    <div class="mdb-page-content text-center" style="width: 100rem; margin-left: 6cm;">
+      <div class="text-center py-5">
+        <div class="col-lg-11">
+          <div class="card card-primary card-outline card-tabs">
+              <div class="card-header p-0 pt-1 border-bottom-0">
+                  <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                      <li class="nav-item">
+                          <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Dane sklepu</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Webhook</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Wiadomości</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false">Personalizacja</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-wow" aria-selected="false">Szablony</a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="card-body">
+                  <div class="tab-content" id="custom-tabs-three-tabContent">
+                      <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                          <form method="post" action="">
+                              <input type="hidden" name="_token" value="EAO7h1nZi71a9QmMAgG37jmkhe8xuRuKUFmQF6Wf">                        <div class="row">
+                                  <div class="col-lg-6">
+                                      <div class="card h-100">
+                                          <div class="card-header custom-card-header">
+                                              <h3 class="card-title">Płatności</h3>
+                                          </div>
+                                          <div class="tab-pane" id="tab_1">
+                                              <div class="row">
+                                              <div class="col-lg-8">
+                                                  <form action="" method="post">
+                                                      <input type="hidden" name="_token" value="EAO7h1nZi71a9QmMAgG37jmkhe8xuRuKUFmQF6Wf">                                <input type="hidden" value="37" name="id">
+                                                  <label>Lvlup API key</label>
+                                                  <div class="input-group">
+                                                      <div class="input-group-prepend">
+                                                          <span class="input-group-text">$</span>
+                                                      </div>
+                                                      <% rows.forEach(function(rows) { %>
+                                                          <input type="text" class="form-control" name="lvlup_key" value="<%= rows.lvlupkey %>">
+                                                      <% }); %>
+                                                  </div>
+                                                  <br>
+  
+
+                                                  </form>
+                                              </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <div class="card h-100">
+                                          <div class="card-header custom-card-header">
+                                              <h3 class="card-title">Opis</h3>
+                                          </div>
+                                          <div class="card-body">
+                                              <div class="form-group">
+                                                  <textarea class="form-control" name="description" id="full-description"><%= desc %></textarea>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-12 text-center">
+                                      <div class="card-body">
+                                          <div class="form-group">
+                                              <input class="btn btn-primary" type="submit" value="Aktualizuj">
+                                          </div>
+                                      </div></div>
+                              </div>
+                          </form>                
+                      </div>
+                      <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                          <form method="post" action="webhook">
+                              <input type="hidden" name="_token" value="EAO7h1nZi71a9QmMAgG37jmkhe8xuRuKUFmQF6Wf">                        <div class="row">
+                                  <div class="col-lg-12">
+                                      <div class="card h-100">
+                                          <div class="card-header custom-card-header">
+                                              <h3 class="card-title">Webhook</h3>
+                                          </div>
+                                          <div class="tab-pane" id="tab_1">
+                                              <div class="row">
+                                              <div class="col-lg-8">
+                                                  <form action="" method="post">
+                                                      <input type="hidden" name="_token" value="EAO7h1nZi71a9QmMAgG37jmkhe8xuRuKUFmQF6Wf">   
+                                                      <br>                             <input type="hidden" value="37" name="id">
+                                                  <label>Webhook URL</label>
+                                                  <div class="input-group">
+                                                      <div class="input-group-prepend">
+                                                          <span class="input-group-text">$</span>
+                                                      </div>
+                                                      <% rows.forEach(function(rows) { %>
+                                                          <input type="text" class="form-control" name="webhook_url" value="<%= rows.webhook_url %>">
+                                                      <% }); %>
+                                                  </div>
+                                                  <br>
+                                                  <label>Webhook title</label>
+                                                  <div class="input-group">
+                                                      <div class="input-group-prepend">
+                                                          <span class="input-group-text">$</span>
+                                                      </div>
+                                                      <% rows.forEach(function(rows) { %>
+                                                          <input type="text" class="form-control" name="webhook_title" value="<%= rows.webhooktitle %>">
+                                                      <% }); %>
+                                                  </div>
+                                                  <br>
+                                                  <label>Webhook lore</label>
+                                                  <div class="input-group">
+                                                      <div class="input-group-prepend">
+                                                          <span class="input-group-text">$</span>
+                                                      </div>
+                                                      <% rows.forEach(function(rows) { %>
+                                                      <input type="text" class="form-control" name="webhook_lore" value="<%= rows.webhooklore %>">
+                                                      <% }); %>
+                                                  </div>
+
+                                                  <br>
+                                                  </form>
+                                              </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-lg-12 text-center">
+                                      <div class="card-body">
+                                          <div class="form-group">
+                                              <input class="btn btn-primary" type="submit" value="Aktualizuj">
+                                          </div>
+                                      </div>
+                                    </div>
+                              </div>
+                          </form>    
+                      </div>
+                      <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
+                        <form method="post" action="msg">
+                          <input type="hidden" name="_token" value="EAO7h1nZi71a9QmMAgG37jmkhe8xuRuKUFmQF6Wf">                        
+                          <div class="row">
+                              <div class="col-lg-12">
+                                  <div class="card h-100">
+                                      <div class="card-header custom-card-header">
+                                          <h3 class="card-title">Wiadomości</h3>
+                                      </div>
+                                      <div class="tab-pane" id="tab_1">
+                                          <div class="row">
+                                          <div class="col-lg-8">
+                                              <form action="" method="post">
+                                                  <input type="hidden" name="_token" value="EAO7h1nZi71a9QmMAgG37jmkhe8xuRuKUFmQF6Wf">   
+                                                  <br>                             <input type="hidden" value="37" name="id">
+                                              <label>Przerwa techniczna</label>
+                                              <div class="input-group">
+                                                  <div class="input-group-prepend">
+                                                      <span class="input-group-text">$</span>
+                                                  </div>
+                                                  <% rows.forEach(function(rows) { %>
+                                                      <input type="text" class="form-control" name="offmsg" value="<%= rows.offmsg %>">
+                                                  <% }); %>
+                                              </div>
+                                              <br>
+
+                                              <br>
+                                              </form>
+                                          </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="col-lg-12 text-center">
+                                  <div class="card-body">
+                                      <div class="form-group">
+                                          <input class="btn btn-primary" type="submit" value="Aktualizuj">
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                          </form>  
+                      </div>
+                      <div class="tab-pane fade" id="custom-tabs-three-settings" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
+                        <form method="post" action="shop">
+                          <input type="hidden" name="_token" value="EAO7h1nZi71a9QmMAgG37jmkhe8xuRuKUFmQF6Wf">                        
+                          <div class="row">
+                              <div class="col-lg-12">
+                                  <div class="card h-100">
+                                      <div class="card-header custom-card-header">
+                                          <h3 class="card-title">Personalizacja</h3>
+                                      </div>
+                                      <div class="tab-pane" id="tab_1">
+                                          <div class="row">
+                                          <div class="col-lg-8">
+                                              <form action="" method="post">
+                                                  <input type="hidden" name="_token" value="EAO7h1nZi71a9QmMAgG37jmkhe8xuRuKUFmQF6Wf">   
+                                                  <br>                             <input type="hidden" value="37" name="id">
+                                              <label>Title</label>
+                                              <div class="input-group">
+                                                  <div class="input-group-prepend">
+                                                      <span class="input-group-text">$</span>
+                                                  </div>
+                                                  <% rows.forEach(function(rows) { %>
+                                                      <input type="text" class="form-control" name="shop_title" value="<%= rows.shoptitle %>">
+                                                  <% }); %>
+                                              </div>
+                                              <label>Nazwa</label>
+                                              <div class="input-group">
+                                                  <div class="input-group-prepend">
+                                                      <span class="input-group-text">$</span>
+                                                  </div>
+                                                  <% rows.forEach(function(rows) { %>
+                                                      <input type="text" class="form-control" name="shop_name" value="<%= rows.shopname %>">
+                                                  <% }); %>
+                                              </div>
+                                              <label>Styl CSS</label>
+                                              <div class="input-group">
+                                                  <div class="input-group-prepend">
+                                                      <span class="input-group-text">$</span>
+                                                  </div>
+                                                  <% rows.forEach(function(rows) { %>
+                                                      <input type="text" class="form-control" name="shop_css" value="<%= rows.shopcss %>">
+                                                  <% }); %>
+                                              </div>
+                                              <label>Widget z statusem serwera</label>
+                                              <div class="input-group">
+                                                  <div class="input-group-prepend">
+                                                      <span class="input-group-text">$</span>
+                                                  </div>
+                                                  <% rows.forEach(function(rows) { %>
+                                                    <div class="form-outline mb-4">
+                                                        <% if(rows.serverstatus == 'true'){ %>
+                                                            <select name="serverstatus" id="type" class="btn btn-primary">
+                                                                <option value="true">on</option>
+                                                                <option value="false">off</option>
+                                                            </select>
+                                                            <% } else  { %>
+                                                            <select name="serverstatus" id="type" class="btn btn-primary">
+                                                                <option value="false">off</option>
+                                                                <option value="true">on</option>
+
+                                                            </select>
+                                                        <% } %>     
+                                                </div>
+                                                  <% }); %>
+                                              </div>
+                                              <br>
+
+                                              <br>
+                                              </form>
+                                          </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="col-lg-12 text-center">
+                                  <div class="card-body">
+                                      <div class="form-group">
+                                          <input class="btn btn-primary" type="submit" value="Aktualizuj">
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                          </form>  
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+          <button id="toggler"class="btn btn-dark mt-5"data-toggle="sidenav" data-target="#full-screen-example">
+            <i class="fas fa-bars"></i>
+          </button>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://files.yourcraft.pl/mdbv2pro.js"></script>
+    <script type="text/javascript" src="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/js/mdb.min.js"></script>
+  </body>
+</html>
