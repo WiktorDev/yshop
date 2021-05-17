@@ -1,4 +1,4 @@
-<%- include('includes/sidebar'); -%>
+<%- include('../includes/sidebar'); -%>
     <script>
       var notyf = new Notyf();
   </script>
@@ -251,6 +251,17 @@
                                                       <input type="text" class="form-control" name="shop_css" value="<%= rows.shopcss %>">
                                                   <% }); %>
                                               </div>
+                                              <label>Motyw jasny/ciemny</label>
+                                              <div class="input-group">
+                                                  <div class="input-group-prepend">
+                                                      <span class="input-group-text">$</span>
+                                                      <% if(rows.theme == 'light') { %>
+                                                        <p>Jasny</p>
+                                                      <% } else { %>
+                                                        <p>Ciemny</p>
+                                                     <% } %>  
+                                                  </div>
+                                              </div>
                                               <label>Widget z statusem serwera</label>
                                               <div class="input-group">
                                                   <div class="input-group-prepend">
@@ -259,12 +270,12 @@
                                                   <% rows.forEach(function(rows) { %>
                                                     <div class="form-outline mb-4">
                                                         <% if(rows.serverstatus == 'true'){ %>
-                                                            <select name="serverstatus" id="type" class="btn btn-primary">
+                                                            <select name="serverstatus" id="type" class="btn btn-success">
                                                                 <option value="true">on</option>
                                                                 <option value="false">off</option>
                                                             </select>
                                                             <% } else  { %>
-                                                            <select name="serverstatus" id="type" class="btn btn-primary">
+                                                            <select name="serverstatus" id="type" class="btn btn-danger">
                                                                 <option value="false">off</option>
                                                                 <option value="true">on</option>
 
@@ -274,8 +285,31 @@
                                                   <% }); %>
                                               </div>
                                               <br>
+                                              <label>Widget z voucherami</label>
+                                              <div class="input-group">
+                                                  <div class="input-group-prepend">
+                                                      <span class="input-group-text">$</span>
+                                                  </div>
+                                                  <% rows.forEach(function(rows) { %>
+                                                    <div class="form-outline mb-4">
+                                                        <% if(rows.serverstatus == 'true'){ %>
+                                                            <select name="voucher" id="type" class="btn btn-success">
+                                                                <option value="true">on</option>
+                                                                <option value="false">off</option>
+                                                            </select>
+                                                            <% } else  { %>
+                                                            <select name="voucher" id="type" class="btn btn-danger">
+                                                                <option value="false">off</option>
+                                                                <option value="true">on</option>
+
+                                                            </select>
+                                                        <% } %>     
+                                                </div>
+                                                  <% }); %>
+                                              </div>
 
                                               <br>
+                                              
                                               </form>
                                           </div>
                                           </div>

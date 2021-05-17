@@ -33,8 +33,6 @@
                 }) 
                 </script>
               <% } %>
-            
-            
               <% if (messages.success) { %>
                 <script>
                   notyf.success({
@@ -65,40 +63,25 @@
                         <input type="password" id="password" class="form-control" name="password_repeat" required/>
                         <label class="form-label" for="password">Powtorz haslo</label>
                       </div>
-                
-                    <div class="row mb-4">
-                      <div class="col d-flex justify-content-center">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="remember"
-                            name="remember"
-                            checked
-                          />
-                          <label class="form-check-label" for="remember"> Zapamietaj mnie </label>
-                        </div>
-                      </div>
-                  
-
-                    </div>
-                
+                    <div class="row mb-4"></div>
                     <button type="submit" class="btn btn-primary btn-block mb-4">Loguj</button>
-                  
                     <div class="text-center">
-                      <p>Nie posiadasz konta? Zarejstruj sie <a href="/signup">tutaj</a></p>
-    
+                      <p>Posiadasz juz konto? Zaloguj sie <a href="/auth">tutaj</a></p>
                     </div>
                   </form>
             </div>
-
             <hr>
         </div>
     </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+    <div class="alert text-center cookiealert" role="alert">
+        Strona wykorzystuje pliko cookie
+    
+        <button type="button" class="btn btn-primary btn-sm acceptcookies">
+            Akceptuję
+        </button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
     <script type="text/javascript" src="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/js/mdb.min.js"></script>
 </body>
 </html>
-
-
-

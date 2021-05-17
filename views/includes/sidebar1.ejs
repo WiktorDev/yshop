@@ -57,9 +57,7 @@ data-scroll-container="#scrollContainer"
     />
 
     <h4>
-      <% rows.forEach(function(rows) { %>
-          <span style="white-space: nowrap;"><%= rows.username %></span>
-       <% }); %>
+          <span style="white-space: nowrap;"><%= username %></span>
     </h4>
   </div>
   <hr class="mb-0" />
@@ -69,6 +67,9 @@ data-scroll-container="#scrollContainer"
       <li class="sidenav-item">
           <a class="sidenav-link" href="/shops"><i class="fas fa-tag pr-3"></i>Twoje sklepy</a>
       </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link" href="/panel"><i class="fas fa-plus-square pr-3"></i>Dodaj sklep</a>
+    </li>
 
   </ul>
   <hr class="m-0" />

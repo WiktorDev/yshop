@@ -1,0 +1,23 @@
+.w-110 {
+    width: 110%;
+}
+body, .grey.lighten-3, button.nav-link {
+background-color: #252525 !important;
+}
+
+
+body, .black-text, .btn.btn-link, .toast-close-button:focus, .toast-close-button:hover, table.table a, .pagination .page-item .page-link, .list-group > .list-group-item {
+color: #eeeeee !important;
+}
+
+.list-group-item.active {
+border-color: #000000;
+}
+
+.form-control, input.select-dropdown {
+color: #bababa !important;
+}
+
+.card, .modal-content, .scrolling-navbar.white, .sidebar-fixed, .white-skin .navbar, .white-skin .side-nav {
+background-color: #2d2d2d !important;
+}

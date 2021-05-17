@@ -1,4 +1,4 @@
-<%- include('includes/sidebar1'); -%>
+<%- include('../includes/sidebar1'); -%>
     <div class="card" style="width: 70rem; margin-left: 14cm; margin-top: 6cm;">
       <div class="card-body">
         <table class="table" >
@@ -8,6 +8,7 @@
               <th scope="col">Nazwa</th>
               <th scope="col">ID</th>
               <th scope="col">Status</th>
+              <th scope="col">Data utworzenia</th>
               <th scope="col">Akcja</th>
             </tr>
           </thead>
@@ -22,6 +23,7 @@
                   <% }else{ %>
                     <td><span class="badge bg-danger">Wygasl</span></td>
                     <% } %>
+                    <td><% var txt = rows.createdate %><% var timestamp = moment.unix(txt.substring(0, txt.length - 3)) %><%- timestamp.locale("pl").format('lll') %></td>
                     <!--- <td><button class="btn btn-danger"><i class="fas fa-trash"></i></button> </td> -->
                     <td><a href="/shop/manage/<%= rows.id %>" class="btn btn-primary">zarzadzaj</a></td>
               </tr>

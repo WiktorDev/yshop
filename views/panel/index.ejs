@@ -78,11 +78,11 @@
         }) 
         </script>
       <% } %>
-    <%- include('includes/sidebar1'); -%>
+    <%- include('../includes/sidebar1'); -%>
 
     <div class="mdb-page-content text-center page-intro bg-light">
       <div class="text-center py-5" style="margin-right: 4cm; margin-left: 4cm; ">
-        <form action="/" method="post" >
+        <form action="/panel" method="post" >
             <div class="form-outline mb-4">
               <input type="text" id="form1Example1" class="form-control" name="title" required />
               <label class="form-label" for="form1Example1">Nazwa sklepu</label>
@@ -103,12 +103,8 @@
               <input type="password" id="form1Example1" class="form-control" name="rconpassword" required/>
               <label class="form-label" for="form1Example1">Haslo RCON</label>
             </div>
-            <div class="form-outline mb-4">
-              <input type="password" id="form1Example1" class="form-control" name="lvlupkey" required/>
-              <label class="form-label" for="form1Example1">API key LVLUP</label>
-            </div>
           
-        
+      
             <button type="submit" class="btn btn-primary btn-block">Dodaj sklep</button>
         </form>
         <button
