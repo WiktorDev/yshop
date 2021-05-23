@@ -1,0 +1,13 @@
+Time: Sun May 23 2021 10:22:15 GMT+0200 (czas środkowoeuropejski letni)
+Executed: Process
+Type: Uncaught Exception
+Error Stack:
+TypeError: app.pos is not a function
+    at module.exports (/home/wiktor/Pulpit/apis/app/routes.js:112:9)
+    at Object.<anonymous> (/home/wiktor/Pulpit/apis/server.js:26:27)
+    at Module._compile (internal/modules/cjs/loader.js:1068:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1097:10)
+    at Module.load (internal/modules/cjs/loader.js:933:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:774:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:72:12)
+    at internal/main/run_main_module.js:17:47

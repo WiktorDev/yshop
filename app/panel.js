@@ -1,6 +1,9 @@
 const connection = require('../config/database')
 const moment = require('moment')
-
+const rcon = require("librcon");
+const errorhandler = require("./error").error
+var Recaptcha = require('express-recaptcha').RecaptchaV2;
+var recaptcha = new Recaptcha(process.env.SITE_KEY, process.env.SECRET_KEY);
 module.exports = function(app){
     app.use(function(req,res,next){
         res.locals.moment = moment;
@@ -8,12 +11,12 @@ module.exports = function(app){
         next();
     });
 
-    app.get('/panel',isLoggedIn,function(req,res){
+    app.get('/panel',isLoggedIn,recaptcha.middleware.render,function(req,res){
         var row = [];
         var row2=[];
         connection.query('select * from users where id = ?',[req.session.id], function (err, rows) {
-
             if (err) {
+                return next(err)
                 console.log(err);
             } else {
                 if (rows.length) {
@@ -24,19 +27,28 @@ module.exports = function(app){
                 }
                 console.log(row);
             }
-            res.render('panel/index.ejs', {rows : row});
+            res.render('panel/index.ejs', {
+                rows : row,
+                captcha: res.recaptcha
+            });
         });
     });
-    app.post('/panel', function(req, res) {
+    app.post('/panel',recaptcha.middleware.verify, function(req, res) {
         var x = Math.floor((Math.random() * 10000) + 1);
         connection.query('select * from users where id = ?',[req.session.id], function (err, rows) {
-            connection.query('INSERT INTO `shops`(`id`, `title`, `owner`, `status`, `offmsg`, `serverip`, `serverport`, `rconport`, `rconpassword`, `theme`, `createdate`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [x, req.body.title, req.session.username, 'true', 'Wiadomosc nie zostala ustawiona', req.body.serverip, req.body.serverport, req.body.rconport, req.body.rconpassword, 'light', Date.now()], function(err, result){
-                if(err){
-                    console.log(err)
-                }
-            })
-            req.flash('success', 'Sklep zostal pomyslnie utworzony!')
-            res.redirect('/panel');
+            if(!req.recaptcha.error){
+                connection.query('INSERT INTO `shops`(`id`, `title`, `owner`, `status`, `offmsg`, `serverip`, `serverport`, `rconport`, `rconpassword`, `theme`, `createdate`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [x, req.body.title, req.session.username, 'true', 'Wiadomosc nie zostala ustawiona', req.body.serverip, req.body.serverport, req.body.rconport, req.body.rconpassword, 'light', Date.now()], function(err, result){
+                    if(err){
+                        console.log(err)
+                    }
+                })
+                req.flash('success', 'Sklep zostal pomyslnie utworzony!')
+                res.redirect('/panel');
+            }else{
+                req.flash('error', 'Prosze uzupelnic captche!')
+                res.redirect('/panel')
+            }
+
         });
     });
 
@@ -46,14 +58,17 @@ module.exports = function(app){
         connection.query('select * from products where id = ?',[req.params.id], function (err, rows) {
             connection.query('select * from shops where id = ?',[req.params.id], function (err, rows2) {
                 connection.query('select * from accounts where email = ?',[req.session.username], function (err, rows1) {
+                    if (err) {
+                        return errorhandler(err, req, res)
+                    } 
                         if(!rows2[0]){
                             req.flash('error', 'Ten sklep nie istnieje lub nie nalezy do ciebie!')
                             res.render('status')
                         }else{
                             if(rows2[0].owner == rows1[0].email){
                                 if (err) {
-                                    console.log(err);
-                                } else {
+                                    return next(err)
+                                }  else {
                                     if (rows.length) {
                                         for (var i = 0, len = rows.length; i < len; i++) {
                                             row[i] = rows[i];
@@ -180,6 +195,40 @@ module.exports = function(app){
             });
         });
     })
+    app.get('/panel/manage/:id/navigation',isLoggedIn, (req, res)=>{
+        var row = [];
+        connection.query('select * from shops where id = ?',[req.params.id], function (err, rows) {
+            connection.query('select * from accounts where email = ?',[req.session.username], function (err, rows1) {
+                connection.query("SELECT * FROM `urls` WHERE id = '"+req.params.id+"'", function(err, rows2){
+                    if(!rows[0]){
+                        req.flash('error', 'Ten sklep nie istnieje lub nie nalezy do ciebie!')
+                        res.render('status')
+                    }else{
+                        if(rows[0].owner == rows1[0].email){
+                            console.log(rows[0].owner + "" + rows1[0].email)
+                            res.render('panel/navigation', {
+                                rows: rows,
+                                id: req.params.id,
+                                desc: rows[0].shopdesc,
+                                url: rows2
+                            })
+                        }else{
+                            req.flash('error', 'Ten sklep nie istnieje lub nie nalezy do ciebie!')
+                            res.render('status')
+                        }
+                    }
+                })
+            });
+        });
+    })
+    app.post('/panel/manage/:id/navigation', (req,res)=>{
+        var x = Math.floor((Math.random() * 100000) + 1);
+        connection.query("INSERT INTO `urls`(`id`, `urlid`, `name`, `url`) VALUES (?, ?, ?, ?)",[req.params.id, x, req.body.name, req.body.url], function(err, result){
+            console.log(result)
+            req.flash('success', 'Pomyslnie zapisano zmiany')
+            res.redirect(`/panel/manage/${req.params.id}/navigation`)
+        })
+    })
     app.post('/panel/manage/:id/connection',function(req,res){
         connection.query("UPDATE `shops` SET `serverip`= '" + req.body.server_ip + "', `serverport`='"+req.body.server_port+"', `rconport`='"+req.body.rcon_port+"', `rconpassword`='"+req.body.rcon_pass+"' WHERE id = '"+req.params.id+"'", function(err, result){
             console.log(result)
@@ -247,6 +296,23 @@ module.exports = function(app){
             res.redirect(`/panel`)
         })
     });
+    app.post('/panel/manage/:id/connection/test', function(req, res){
+        connection.query("SELECT * FROM `shops` WHERE id = ?", [req.params.id], function(err, result){
+            (async() => {
+                try {
+                    let data = await rcon.send('say test', result[0].rconpassword, result[0].serverip, result[0].rconport);
+                    req.flash('success', 'Pomyslnie nawiazano polaczenie z RCON')
+                    res.redirect(`/panel/manage/${req.params.id}/connection`)
+                    console.log(data);
+                } catch(err) {
+                    req.flash('error', 'Nie mozna nawiazac polaczenia z RCON!')
+                    res.redirect(`/panel/manage/${req.params.id}/connection`)
+                    console.log( result[0].rconpassword + '' + result[0].serverip + '' + result[0].rconport)
+                    console.log(err.message);
+                }
+            })();
+        })
+    })
     app.get('/panel/manage/:id/addproduct',isLoggedIn,function(req,res){
         connection.query('select * from shops where id = ?',[req.params.id], function (err, rows) {
             connection.query('select * from accounts where email = ?',[req.session.username], function (err, rows1) {
@@ -287,7 +353,7 @@ module.exports = function(app){
                     if(rows[0].owner == rows1[0].email){
                         var row = [];
                         var row2=[];
-                        connection.query('select * from payments where id = ?',[req.params.id], function (err, rows2) {
+                        connection.query('select * from payments where id = ? ORDER BY data DESC',[req.params.id], function (err, rows2) {
                                 if (err) {
                                     console.log(err);
                                 } else {

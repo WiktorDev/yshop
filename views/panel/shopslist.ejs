@@ -4,20 +4,19 @@
         <table class="table" >
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nazwa</th>
               <th scope="col">ID</th>
+              <th scope="col">Nazwa</th>
               <th scope="col">Status</th>
               <th scope="col">Data utworzenia</th>
               <th scope="col">Akcja</th>
+              <th scope="col">Sklep</th>
             </tr>
           </thead>
           <tbody>
               <% rows.forEach(function(rows) { %>
                 <tr>
-                <td>1</td>
-                <td><%= rows.title %></td>
                 <td><%= rows.id %></td>
+                <td><%= rows.title %></td>
                 <% if (rows.status == 'true'){ %>
                   <td><span class="badge bg-success">Aktywny</span></td>
                   <% }else{ %>
@@ -26,6 +25,7 @@
                     <td><% var txt = rows.createdate %><% var timestamp = moment.unix(txt.substring(0, txt.length - 3)) %><%- timestamp.locale("pl").format('lll') %></td>
                     <!--- <td><button class="btn btn-danger"><i class="fas fa-trash"></i></button> </td> -->
                     <td><a href="/shop/manage/<%= rows.id %>" class="btn btn-primary">zarzadzaj</a></td>
+                    <td><a href="/shop/<%= rows.id %>" class="btn btn-success"><i class="fas fa-arrow-circle-right"></i></a></td>
               </tr>
                   <% }); %>
           </tbody>

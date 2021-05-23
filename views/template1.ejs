@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pl">
+	<head>
+		<title><%= stitle %></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://files.yourcraft.pl/mdbv2pro.css">
+		<link rel="stylesheet" href="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/css/mdb.min.css" />
+		<link rel="stylesheet" href="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/dev/css/new-prism.css" />
+		<link rel="stylesheet" href="https://www.sklepmc.pl/static/css/mdb.min.css">
+		<!--<link rel="stylesheet" href="/shopcss.css">-->
+	</head>
+	<body>
+		<div class="container mt-md-4 px-md-5  pb-md-5">
+			<div class="pt-3 pt-sm-5 pb-4 pb-sm-5">
+				<div class="row">
+					<div class="row w-120">
+						<center>
+							<h1><%= sname %></h1>
+						</center>
+						<ul class="nav nav-tabs md-tabs primary-color w-100" style="margin-right: 5cm;" role="tablist">
+							<li class="nav-item">
+							<a class="nav-link active" href="/shop/1JhaeJ1u">Voucher</a>
+							</li>
+							</ul>
+						<div class="col-md-8 mt-md-8 mt-4">
+							<div class="row">
+								<div class="col-md-18">
+									<% if(!rows1[0]) { %>
+										<div class="alert alert-danger" role="alert">
+											Administrator sklepu nie dodał żadnych produktów!
+										  </div>
+									<% } else { %>
+										<% rows1.forEach(function(rows1) { %>
+
+											<div class="tab-content card mt-4 ">
+												<center>
+													<H1><%= rows1.name %></H1>
+													
+												</center>
+												
+												<center>
+	
+											
+												<div style="margin-left: 4cm; margin-right: 4cm;"><%= rows1.lore %> </div>
+												<div style="margin-left: 4cm; margin-right: 4cm;"><center>Cena: <%= rows1.price %>zł</center></div>
+											</center>
+												<hr>
+												<center>
+													<button class="btn btn-primary" style="border-radius: 10px; "  type="button" data-toggle="modal" data-target="#basicExampleModal<%= rows1.name %>">Kup</button>
+												</center>
+												<div class="modal fade" id="basicExampleModal<%= rows1.name %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+												   aria-hidden="true">
+												   <div class="modal-dialog" role="document">
+												  <div class="modal-content">
+													<div class="modal-header">
+													  <h5 class="modal-title" id="exampleModalLabel">Płatność</h5>
+													  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													  </button>
+													</div>
+													<div class="modal-body">
+														<form action="" method="POST">
+															<input class="modal-btn" type="hidden" id="<%= rows1.name %>form" name="test" value="<%= rows1.name %>"/>
+															<input class="modal-btn" type="hidden" id="<%= rows1.name %>form" name="pid" value="<%= rows1.pid %>"/>
+
+															<div class="form-outline">
+																<input type="text" id="<%= rows1.name %>form1" class="form-control" required/>
+																<label class="form-label" for="<%= rows1.name %>form1" name="pay">Twój nick</label>
+																
+															  </div>
+															  <br>
+															<% if(rows1.type == 'suwak'){ %>
+	
+																<input type="range" id="count" name="count" class="form-range"
+																min="<%= rows1.mincount %>" max="<%= rows1.maxcount %>">
+																<label for="count">Ilość <span id="demo"></span></label>
+							
+															<% }else{ %>
+							
+																
+															<% } %>
+			 
+													         </div>
+													          <div class="modal-footer">
+													              <button type="submit" class="btn btn-primary" style="border-radius: 10px; ">Płatność</button>
+													        </div>
+												        </form>
+												  </div>
+												</div>
+											  </div>
+											</div>
+
+										<% }); %>
+									<% } %>	
+								</div>
+
+							</div>
+						</div>
+						<div class="col-md-4 mt-md-5 mt-4">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="card mb-4 pb-0">
+										<h5 class="mt-2 py-1 text-center widget-header">Status serwera</h5>
+										<hr class="mx-2 py-0 mt-0 mb-0">
+										<center>
+											<% if(status.online == true){ %>
+												<h2 style="color: green;">ONLINE</h2>
+												<p>Gracze online: <%= status.players.now %>/<%= status.players.max %></p>
+											<% } else { %>	
+											<h2 style="color: red;">OFFLINE</h2>
+											<p>Gracze online: -/-</p>
+											<% } %>
+										</center>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="card mb-4 pb-0">
+										<h5 class="mt-2 py-1 text-center widget-header">Voucher</h5>
+										<hr class="mx-2 py-0 mt-0 mb-0">
+										<div class="p-3 pb-2">
+											<form action="voucher" method="POST">
+												<div class="form-outline mb-4">
+													<input type="text" id="nick" class="form-control" name="nick"/>
+													<label class="form-label" for="nick">Nick</label>
+												  </div>
+												<div class="form-outline mb-4">
+													<input type="text" id="password" class="form-control" name="voucher"/>
+													<label class="form-label" for="password">Kod vouchera</label>
+												  </div>
+												  <button type="submit" class="btn btn-primary" style="border-radius: 10px; ">Wykorzystaj</button>
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="card mb-4 pb-0">
+										<h5 class="mt-2 py-1 text-center widget-header">Ostatnie zakupy</h5>
+										<hr class="mx-2 py-0 mt-0 mb-3">
+										<div class="row">
+											<div class="col-md-12 mb-3">
+												<div class="row px-3">
+													<div class="">
+														<img class="avatar-img" src="https://www.topkamc.pl/content/player/dupa/avatar?dimensions=32" width="38" height="38">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var slider = document.getElementById("count");
+			var output = document.getElementById("demo");
+			output.innerHTML = slider.value;
+			
+			slider.oninput = function() {
+			  output.innerHTML = this.value;
+			}
+			</script>
+            <script type="text/javascript" src="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/js/mdb.min.js"></script>
+    </body>
+</html>

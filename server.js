@@ -1,5 +1,6 @@
 require("dotenv").config()
 global.logger = require("sweet-logger")
+require("./app/error")
 const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -7,20 +8,20 @@ const bodyParser = require('body-parser');
 const app = express();
 const flash = require('express-flash');
 const config = require("./config/config")
-
+app.use(require("./app/error").handler);
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
-app.set('view engine', 'ejs');
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
- } ));
- app.use(flash());
+ }));
+app.use(flash());
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
 
 require('./app/routes.js')(app); 
 require('./app/panel.js')(app); 

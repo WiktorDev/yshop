@@ -1,0 +1,13 @@
+Time: Sat May 22 2021 20:03:57 GMT+0200 (czas środkowoeuropejski letni)
+Executed: Process
+Type: Uncaught Exception
+Error Stack:
+TypeError: Cannot read property 'lvlupkey' of undefined
+    at Query.onResult (/home/wiktor/Pulpit/apis/app/routes.js:115:55)
+    at PoolConnection._notifyError (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/connection.js:201:21)
+    at PoolConnection._handleFatalError (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/connection.js:156:10)
+    at PoolConnection._handleNetworkError (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/connection.js:169:10)
+    at Socket.emit (events.js:376:20)
+    at emitErrorNT (internal/streams/destroy.js:106:8)
+    at emitErrorCloseNT (internal/streams/destroy.js:74:3)
+    at processTicksAndRejections (internal/process/task_queues.js:82:21)
