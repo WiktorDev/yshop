@@ -1,43 +1,39 @@
 <%- include('../includes/sidebar1'); -%>
-    <div class="card" style="width: 70rem; margin-left: 14cm; margin-top: 6cm;">
-      <div class="card-body">
-        <table class="table" >
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nazwa</th>
-              <th scope="col">Status</th>
-              <th scope="col">Data utworzenia</th>
-              <th scope="col">Akcja</th>
-              <th scope="col">Sklep</th>
-            </tr>
-          </thead>
-          <tbody>
-              <% rows.forEach(function(rows) { %>
-                <tr>
-                <td><%= rows.id %></td>
-                <td><%= rows.title %></td>
-                <% if (rows.status == 'true'){ %>
-                  <td><span class="badge bg-success">Aktywny</span></td>
-                  <% }else{ %>
-                    <td><span class="badge bg-danger">Wygasl</span></td>
+<main style="margin-top: 58px">
+  <div class="container pt-4">
+    <br>
+    <center>
+      <h1>Twoje sklepy</h1>
+    </center>
+    <br>
+    <section>
+      <div class="row">
+        <% rows.forEach(function(rows) { %>
+          <div class="col-xl-6 col-sm-6 col-12 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                  <p>Nazwa <b><%= rows.title %></b><br>
+                    <% if (rows.status == 'true'){ %>
+                      Status <span class="badge bg-success">Aktywny</span><br>
+                    <% }else{ %>
+                      Status <span class="badge bg-danger">Wygasł</span><br>
                     <% } %>
-                    <td><% var txt = rows.createdate %><% var timestamp = moment.unix(txt.substring(0, txt.length - 3)) %><%- timestamp.locale("pl").format('lll') %></td>
-                    <!--- <td><button class="btn btn-danger"><i class="fas fa-trash"></i></button> </td> -->
-                    <td><a href="/shop/manage/<%= rows.id %>" class="btn btn-primary">zarzadzaj</a></td>
-                    <td><a href="/shop/<%= rows.id %>" class="btn btn-success"><i class="fas fa-arrow-circle-right"></i></a></td>
-              </tr>
-                  <% }); %>
-          </tbody>
-        </table>
+                  Data utworzenia <b><% var txt = rows.createdate %><% var timestamp = moment.unix(txt.substring(0, txt.length - 3)) %><%- timestamp.locale("pl").format('lll') %></b>
+                  </p> 
+                  <h3><%= rows.id %></h3>
+                </div>
+                <hr>
+                <a href="/shop/manage/<%= rows.id %>" class="btn btn-primary">zarzadzaj</a>
+                <a href="/shop/<%= rows.id %>" class="btn btn-success"><i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+            <% }); %>
       </div>
-    </div>
+    </section>
   </div>
-      </div>
-        <button id="toggler"class="btn btn-dark mt-5"data-toggle="sidenav"data-target="#full-screen-example">
-          <i class="fas fa-bars"></i>
-        </button>
-    </div>
-    <script type="text/javascript" src="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/js/mdb.min.js"></script>
-  </body>
+</main>
+<%- include('../includes/footer'); -%>
+</body>
 </html>

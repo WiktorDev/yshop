@@ -157,11 +157,11 @@ module.exports = function(app) {
                             var count = result2[0].count
                             var cmd = result3[0].cmd;
                             var cmd2 = cmd.replace('{player}', nick)
-                            const hook = new Webhook("https://discord.com/api/webhooks/840935155275399218/qrmo5cuMcnPVVPkFEIhiG6qgWrA9IxKYq__vPPOyyoZLvy0eQQRgXg60XW4uMrSw93Ip");
+                            const hook = new Webhook(result4[0].webhook_url);
                             const embed = new MessageBuilder()
-                            .setTitle('YourShop')
+                            .setTitle(result4[0].webhooktitle)
                             .setURL('https://localhost:3000/shop/'+req.params.id)
-                            .setColor('#00b0f4')
+                            .setColor(result4[0].webhook_color)
                             .setDescription(txt.replace(/{player}/g, nick))
                             .setFooter('ID sklepu: ' + req.params.id)
                             .setTimestamp();
@@ -210,15 +210,9 @@ module.exports = function(app) {
                         req.flash('error', 'To konto nie jest aktywowane!')
                         res.redirect('/auth')
                     }else{
-                        if(!req.recaptcha.error){
-                            req.session.loggedin = true;
-                            req.session.username = username;
-                            res.redirect('/panel')
-                        }else{
-                            req.flash('error', 'Prosze uzupelnic reCaptche!')
-                            res.redirect('/auth')
-                        }
-
+                        req.session.loggedin = true;
+                        req.session.username = username;
+                        res.redirect('/panel')
                     }
                 } else {
                     req.flash('error', 'Niepoprawne haslo lub uzytkownik!')

@@ -1,77 +1,78 @@
 <%- include('../includes/sidebar'); -%>
-
-    <div class="mdb-page-content text-center page-intro bg-light">
-      <div class="text-center py-5">
-        <% rows.forEach(function(rows) { %>
-          <h1>Sklep: <%= rows.title %></h1>
-          <% }); %>
-        <div class="card" style="width: 60rem; margin-left: 10cm; margin-top: 4cm;">
-            <div class="card-body">
-                <table class="table" >
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nazwa</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Ilosc produktow</th>
-                        <th scope="col">Ilosc voucherow</th>
-                        <th scope="col">Data utworzenia</th>
-                        <th scope="col">Akcja</th>
-
-                      </tr>
-                    </thead>
-                    <tbody>
-          
-                        <% rows.forEach(function(rows) { %>
-                          <tr>
-                          <td>1</td>
-                          <td><%= rows.title %></td>
-                          <td><%= rows.id %></td>
-                          <% if (rows.status == 'true'){ %>
-                            <td><span class="badge bg-success">Aktywny</span></td>
-                            <% }else{ %>
-                              <td><span class="badge bg-danger">Wygasl</span></td>
-                              <% } %>
-                              <td>2</td>
-                              <td>0</td>
-                              <td><% var txt = rows.createdate %><% var timestamp = moment.unix(txt.substring(0, txt.length - 3)) %><%- timestamp.locale("pl").format('lll') %></td>
-                              <!--- <td><button class="btn btn-danger"><i class="fas fa-trash"></i></button> </td> -->
-                              <td><button class="btn btn-danger" data-toggle="modal" data-target="#basicExampleModal<%= rows.name %>"><i class="fas fa-trash"></i></button></td>
+<main style="margin-top: 58px">
+  <div class="container pt-4">
+    <br>
+    <section>
+      <div class="row">
+        <div class="text-center py-5">
+          <% rows.forEach(function(rows) { %>
+            <h1>Sklep: <%= rows.title %></h1>
+            <% }); %>
+          <div class="card">
+              <div class="card-body">
+                  <table class="table" >
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Nazwa</th>
+                          <th scope="col">ID</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Ilosc produktow</th>
+                          <th scope="col">Ilosc voucherow</th>
+                          <th scope="col">Data utworzenia</th>
+                          <th scope="col">Akcja</th>
+  
                         </tr>
-                            <% }); %>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+            
+                          <% rows.forEach(function(rows) { %>
+                            <tr>
+                            <td>1</td>
+                            <td><%= rows.title %></td>
+                            <td><%= rows.id %></td>
+                            <% if (rows.status == 'true'){ %>
+                              <td><span class="badge bg-success">Aktywny</span></td>
+                              <% }else{ %>
+                                <td><span class="badge bg-danger">Wygasl</span></td>
+                                <% } %>
+                                <td>2</td>
+                                <td>0</td>
+                                <td><% var txt = rows.createdate %><% var timestamp = moment.unix(txt.substring(0, txt.length - 3)) %><%- timestamp.locale("pl").format('lll') %></td>
+                                <!--- <td><button class="btn btn-danger"><i class="fas fa-trash"></i></button> </td> -->
+                                <td><button class="btn btn-danger" data-toggle="modal" data-target="#basicExampleModal<%= rows.name %>"><i class="fas fa-trash"></i></button></td>
+                          </tr>
+                              <% }); %>
+                      </tbody>
+                    </table>
+              </div>
+  
+  
+              <div class="modal fade" id="basicExampleModal<%= rows.name %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Usuwanie sklepu</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="/shop/manage/<%= id %>/delete" method="POST">
+                    <p><b>UWAGA!</b> Po usunięciu nie będzie możliwości odzyskania sklepu!</p>
+                    <button type="submit" class="btn btn-success">Potwierdz</button>
+                    <button type="button" data-mdb-dismiss="basicExampleModal<%= rows.name %>" class="btn btn-danger">Anuluj</button>
+                  <form action="">
+                      <br>
+  
+                </div>
             </div>
-
-
-            <div class="modal fade" id="basicExampleModal<%= rows.name %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Usuwanie sklepu</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form action="/shop/manage/<%= id %>/delete" method="POST">
-                  <p><b>UWAGA!</b> Po usunięciu nie będzie możliwości odzyskania sklepu!</p>
-                  <button type="submit" class="btn btn-success">Potwierdz</button>
-                  <button type="button" data-mdb-dismiss="basicExampleModal<%= rows.name %>" class="btn btn-danger">Anuluj</button>
-                <form action="">
-                    <br>
-
-              </div>
-          </div>
-        <button id="toggler"class="btn btn-dark mt-5"data-toggle="sidenav"data-target="#full-screen-example">
-          <i class="fas fa-bars"></i>
-        </button>
+        </div>
       </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://files.yourcraft.pl/mdbv2pro.js"></script>
-    <script type="text/javascript" src="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/js/mdb.min.js"></script>
-  </body>
+    </section>
+  </div>
+</main>
+<%- include('../includes/footer'); -%>
+</body>
 </html>

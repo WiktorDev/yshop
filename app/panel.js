@@ -275,7 +275,7 @@ module.exports = function(app){
         })
     })
     app.post('/panel/manage/:id/webhook', isLoggedIn ,function(req,res){
-        connection.query("UPDATE `shops` SET `webhooktitle`= '" + req.body.webhook_title + "',`webhooklore`= '" + req.body.webhook_lore + "',`webhook_url`= '" + req.body.webhook_url + "' WHERE id = '" + req.params.id + "'", function(err, result){
+        connection.query("UPDATE `shops` SET `webhooktitle`= '" + req.body.webhook_title + "',`webhooklore`= '" + req.body.webhook_lore + "', `webhook_color` = '"+req.body.webhook_color+"',`webhook_url`= '" + req.body.webhook_url + "' WHERE id = '" + req.params.id + "'", function(err, result){
             console.log(result)
             req.flash('success', 'Pomyslnie zapisano zmiany')
             res.redirect(`/panel/manage/${req.params.id}/settings`)

@@ -1,14 +1,10 @@
-IP: ::ffff:127.0.0.1
-Path: /shop/dupa
-Time: Tue May 18 2021 19:52:45 GMT+0200 (czas środkowoeuropejski letni)
-Method: GET
-Params: [object Object]
-Data: None, or no POST
-Executed: Inside router
+Time: Sun May 23 2021 20:43:37 GMT+0200 (czas środkowoeuropejski letni)
+Executed: Process
+Type: Uncaught Exception
 Error Stack:
-Error: Access denied for user 'yourcraft2'@'dynamic185-13-187-152.ostnet.pl' (using password: YES)
-    at Packet.asError (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/packets/packet.js:712:17)
-    at ClientHandshake.execute (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/commands/command.js:28:26)
+TypeError: Cannot read property 'lvlupkey' of undefined
+    at Query.onResult (/home/wiktor/Pulpit/apis/app/routes.js:127:55)
+    at Query.execute (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/commands/command.js:30:14)
     at PoolConnection.handlePacket (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/connection.js:425:32)
     at PacketParser.onPacket (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/connection.js:75:12)
     at PacketParser.executeStart (/home/wiktor/Pulpit/apis/node_modules/mysql2/lib/packet_parser.js:75:16)
