@@ -23,9 +23,6 @@
                     <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false">Personalizacja</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-wow" aria-selected="false">Szablony</a>
-                    </li>
                 </ul>
             </div>
             <div class="card-body">
@@ -53,8 +50,6 @@
                                                     <% }); %>
                                                 </div>
                                                 <br>
-
-
                                                 </form>
                                             </div>
                                             </div>
@@ -75,10 +70,16 @@
                                 </div>
                                 <div class="col-lg-12 text-center">
                                     <div class="card-body">
+                                        <div class="text-center">
+                                            <a class="txt2" href="#">	
+                                              <%- captcha %>
+                                            </a>
+                                          </div>
                                         <div class="form-group">
                                             <input class="btn btn-primary" type="submit" value="Aktualizuj">
                                         </div>
-                                    </div></div>
+                                    </div>
+                                </div>
                             </div>
                         </form>                
                     </div>
@@ -125,9 +126,7 @@
                                                     <% rows.forEach(function(rows) { %>
                                                     <input type="text" class="form-control" name="webhook_lore" value="<%= rows.webhooklore %>">
                                                     <% }); %>
-
                                                 </div>
-
                                                 <br>
                                                 <label>Kolor embedu</label>
                                                 <hr>
@@ -158,7 +157,6 @@
                                                                    <hr>
                                                                    <p>Aktualny kolor <b><%= rows.webhook_color %></b></p>
                                                                   <% }); %>
-
                                                                 </div>
                                                           </div>
                                                         </div>
@@ -171,9 +169,13 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-12 text-center">
                                     <div class="card-body">
+                                        <div class="text-center">
+                                            <a class="txt2" href="#">	
+                                              <%- captcha %>
+                                            </a>
+                                          </div>
                                         <div class="form-group">
                                             <input class="btn btn-primary" type="submit" value="Aktualizuj">
                                         </div>
@@ -215,9 +217,13 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 text-center">
                                 <div class="card-body">
+                                    <div class="text-center">
+                                        <a class="txt2" href="#">	
+                                          <%- captcha %>
+                                        </a>
+                                      </div>
                                     <div class="form-group">
                                         <input class="btn btn-primary" type="submit" value="Aktualizuj">
                                     </div>
@@ -272,12 +278,23 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">$</span>
-                                                    <% if(rows.theme == 'light') { %>
-                                                      <p>Jasny</p>
-                                                    <% } else { %>
-                                                      <p>Ciemny</p>
-                                                   <% } %>  
+                                                </div>  
+                                                <div class="form-outline mb-4">  
+                                                    <% rows.forEach(function(rows) { %>
+                                                        <% if(rows.theme == "light") { %>
+                                                            <select name="theme" id="type" class="btn btn-light">
+                                                                <option value="light">jasny</option>
+                                                                <option value="dark">ciemny</option>
+                                                            </select>
+                                                        <% } else { %>
+                                                            <select name="theme" id="type" class="btn btn-dark">
+                                                                <option value="dark">ciemny</option>
+                                                                <option value="light">jasny</option>
+                                                            </select>
+
+                                                       <% } %>  
                                                 </div>
+                                                    <% }); %>
                                             </div>
                                             <label>Widget z statusem serwera</label>
                                             <div class="input-group">
@@ -295,63 +312,103 @@
                                                           <select name="serverstatus" id="type" class="btn btn-danger">
                                                               <option value="false">off</option>
                                                               <option value="true">on</option>
-
                                                           </select>
                                                       <% } %>     
                                               </div>
                                                 <% }); %>
                                             </div>
-                                            <br>
-                                            <label>Widget z voucherami</label>
+                                            <label>Kolor sklepu</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">$</span>
                                                 </div>
-                                                <% rows.forEach(function(rows) { %>
                                                   <div class="form-outline mb-4">
-                                                      <% if(rows.serverstatus == 'true'){ %>
-                                                          <select name="voucher" id="type" class="btn btn-success">
-                                                              <option value="true">on</option>
-                                                              <option value="false">off</option>
-                                                          </select>
-                                                          <% } else  { %>
-                                                          <select name="voucher" id="type" class="btn btn-danger">
-                                                              <option value="false">off</option>
-                                                              <option value="true">on</option>
-
-                                                          </select>
-                                                      <% } %>     
+                                                    <% rows.forEach(function(rows) { %>
+                                                    <a class="btn btn-<%= rows.color %>" data-toggle="modal" data-target="#basicExampleModal">Otworz menu</a>
+                                                    <% }); %>
                                               </div>
-                                                <% }); %>
                                             </div>
-
-                                            <br>
-                                            
                                             </form>
                                         </div>
+                                        
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 text-center">
                                 <div class="card-body">
+                                    <div class="text-center">
+                                        <a class="txt2" href="#">	
+                                          <%- captcha %>
+                                        </a>
+                                      </div>
                                     <div class="form-group">
                                         <input class="btn btn-primary" type="submit" value="Aktualizuj">
                                     </div>
                                 </div>
                               </div>
+                              
                           </div>
-                        </form>  
+                        </form> 
+
+                        <br>
+                        <br>
+                        <% rows.forEach(function(rows) { %>
+                            <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Kolor sklepu</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="shop/color" method="POST">
+                                        <p>Kliknij kolor który chcez wybrać</p>
+                                        <button type="submit" class="btn btn-primary" value="primary" name="color"></button>
+                                        <button type="submit" class="btn btn-secondary" value="secondary" name="color"></button>
+                                        <button type="submit" class="btn btn-success" value="success" name="color"></button>
+                                        <button type="submit" class="btn btn-danger" value="danger" name="color"></button>
+                                        <button type="submit" class="btn btn-warning" value="warning" name="color"></button>
+                                        <button type="submit" class="btn btn-info" value="info" name="color"></button>
+                                        <button type="submit" class="btn btn-dark" value="dark" name="color"></button>
+                                      <hr>
+                                    </form>
+                                    <br>
+                              </div>
+                          </div>
+                            <% }); %> 
                     </div>
                 </div>
-                
             </div>
         </div>
       </div>
     </section>
   </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+<script>
+    var colorPicker = new iro.ColorPicker(".colorPicker", {
+        width: 280,
+        color: "rgb(255, 0, 0)",
+        borderWidth: 1,
+        borderColor: "#fff",
+    });
+    var values = document.getElementById("values");
+    var hexInput = document.getElementById("hexInput");
+    colorPicker.on(["color:init", "color:change"], function(color){
+        values.innerHTML = [
+        "hex: " + color.hexString,
+        "rgb: " + color.rgbString,
+        "hsl: " + color.hslString,
+        ].join("<br>");
+        hexInput.value = color.hexString;
+    });
+    hexInput.addEventListener('change', function() {
+        colorPicker.color.hexString = this.value;
+    });
+</script>
 <%- include('../includes/footer'); -%>
 </body>
 </html>

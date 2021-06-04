@@ -27,27 +27,54 @@
                           <th scope="col">Akcja</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <% rows.forEach(function(rows) { %>
-                          <tr>
-                            <td><img src="<%= rows.image %>" alt="" width="50px"></td>
-                            <td><%= rows.name %></td>
-                            <td><%= rows.pid %></td>
-                            <td><%= rows.price %>zł</td>
-                            <td>0</td>
-                            <% if(rows.type == 'suwak'){ %>
-                              <td><span class="badge bg-success">ON</span></td>
-                            <% } else { %>
-                              <td><span class="badge bg-danger">OFF</span></td>
-                            <% } %>
-                            <td><button class="btn btn-danger"><i class="fas fa-trash"></i></button> </td>
-                            <td><a href="/panel/manage/<%= id %>/editproduct/<%= rows.pid %>" class="btn btn-primary">Edytuj</a></td>
-                          </tr>
+                      <% rows.forEach(function(rows) { %>
+                        <tbody>
+                            <tr>
+                              <td><img src="<%= rows.image %>" alt="" width="50px"></td>
+                              <td><%= rows.name %></td>
+                              <td><%= rows.pid %></td>
+                              <td><%= rows.price %>zł</td>
+                              <td>0</td>
+                              <% if(rows.type == 'suwak'){ %>
+                                <td><span class="badge bg-success">ON</span></td>
+                              <% } else { %>
+                                <td><span class="badge bg-danger">OFF</span></td>
+                              <% } %>
+                              <td><button class="btn btn-danger" data-toggle="modal" data-target="#basicExampleModal<%= rows.pid %>"><i class="fas fa-trash"></i></button> </td>
+                              <td><a href="/panel/manage/<%= id %>/editproduct/<%= rows.pid %>" class="btn btn-primary">Edytuj</a></td>
+                              <div class="modal fade" id="basicExampleModal<%= rows.pid %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Usuwanie produktu</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form action="product/delete/<%= rows.pid %>" method="POST">
+                                        <p><b>UWAGA!</b> Po usunięciu nie będzie możliwości odzyskania produktu!</p>
+                                        <button type="submit" class="btn btn-success">Potwierdz</button>
+                                        <button type="button" data-mdb-dismiss="#basicExampleModal<%= rows.name %>" class="btn btn-danger">Anuluj</button>
+                                        <hr>
+                                        <div class="text-center">
+                                          <a class="txt2" href="#">	
+                                            <%- captcha %>
+                                          </a>
+                                        </div>
+                                      </form>
+                                      <br>
+                                </div>
+                            </div>
+                            </tr>
+                        </tbody>
+
                       <% }); %>
-                      </tbody>
                     </table>
                    <% } %>   
+                   
                 </div>
+
               </div>
           </div>
     </section>

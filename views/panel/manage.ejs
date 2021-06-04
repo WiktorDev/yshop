@@ -4,73 +4,133 @@
     <br>
     <section>
       <div class="row">
-        <div class="text-center py-5">
-          <% rows.forEach(function(rows) { %>
-            <h1>Sklep: <%= rows.title %></h1>
-            <% }); %>
+        <div class="col-xl-12 col-sm-12 col-12 mb-4">
           <div class="card">
-              <div class="card-body">
-                  <table class="table" >
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Nazwa</th>
-                          <th scope="col">ID</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">Ilosc produktow</th>
-                          <th scope="col">Ilosc voucherow</th>
-                          <th scope="col">Data utworzenia</th>
-                          <th scope="col">Akcja</th>
-  
-                        </tr>
-                      </thead>
-                      <tbody>
-            
-                          <% rows.forEach(function(rows) { %>
-                            <tr>
-                            <td>1</td>
-                            <td><%= rows.title %></td>
-                            <td><%= rows.id %></td>
-                            <% if (rows.status == 'true'){ %>
-                              <td><span class="badge bg-success">Aktywny</span></td>
-                              <% }else{ %>
-                                <td><span class="badge bg-danger">Wygasl</span></td>
-                                <% } %>
-                                <td>2</td>
-                                <td>0</td>
-                                <td><% var txt = rows.createdate %><% var timestamp = moment.unix(txt.substring(0, txt.length - 3)) %><%- timestamp.locale("pl").format('lll') %></td>
-                                <!--- <td><button class="btn btn-danger"><i class="fas fa-trash"></i></button> </td> -->
-                                <td><button class="btn btn-danger" data-toggle="modal" data-target="#basicExampleModal<%= rows.name %>"><i class="fas fa-trash"></i></button></td>
-                          </tr>
-                              <% }); %>
-                      </tbody>
-                    </table>
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <% rows.forEach(function(rows) { %>
+                <div class="align-self-center">
+                  <a class="btn btn-success" href="/shop/<%= id %>">Podgląd</a>
+                </div>
+                  <h1>Sklep: <%= rows.title %></h1>
+
+                <div class="text-end">
+                  
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#basicExampleModal<%= rows.id %>"><i class="fas fa-trash"></i></button>
+                  <% }); %>
+                </div>
               </div>
-  
-  
-              <div class="modal fade" id="basicExampleModal<%= rows.name %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Usuwanie sklepu</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="/shop/manage/<%= id %>/delete" method="POST">
-                    <p><b>UWAGA!</b> Po usunięciu nie będzie możliwości odzyskania sklepu!</p>
-                    <button type="submit" class="btn btn-success">Potwierdz</button>
-                    <button type="button" data-mdb-dismiss="basicExampleModal<%= rows.name %>" class="btn btn-danger">Anuluj</button>
-                  <form action="">
-                      <br>
-  
-                </div>
             </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div class="align-self-center">
+                  <i class="fas fa-shopping-cart text-danger fa-3x"></i>
+                </div>
+                <div class="text-end">
+                  <h3><%= products %></h3>
+                  <p class="mb-0">Produkty</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div class="align-self-center">
+                  <i class="fas fa-credit-card fa-3x text-warning"></i>
+                </div>
+                <div class="text-end">
+                  <h3><%= vouchers %></h3>
+                  <p class="mb-0">Vouchery</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div class="align-self-center">
+                  <i class="fas fa-link text-success fa-3x"></i>
+                </div>
+                <div class="text-end">
+                  <h3><%= links %></h3>
+                  <p class="mb-0">Linki</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <br>
+      <div class="row">
+        <div class="col-xl-6 col-sm-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div>
+                  <h3 class="text-danger"><%= payments %></h3>
+                  <p class="mb-0">Transakcje</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-university text-danger fa-3x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-sm-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div>
+                  <h3 class="text-success"><%= money %> PLN</h3>
+                  <p class="mb-0">Zarobione pieniądze</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-money-bill-wave text-success fa-3x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    <br>
+    <% rows.forEach(function(rows) { %>
+      <div class="modal fade" id="basicExampleModal<%= rows.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Usuwanie sklepu</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/shop/manage/<%= id %>/delete" method="POST">
+                <p><b>UWAGA!</b> Po usunięciu nie będzie możliwości odzyskania sklepu!</p>
+                <button type="submit" class="btn btn-success">Potwierdz</button>
+                <button type="button" data-mdb-dismiss="basicExampleModal<%= rows.id %>" class="btn btn-danger">Anuluj</button>
+                <hr>
+                <div class="text-center">
+                  <a class="txt2" href="#">	
+                    <%- captcha %>
+                  </a>
+                </div>
+              </form>
+              <br>
+        </div>
+    </div>
+      <% }); %>
   </div>
 </main>
 <%- include('../includes/footer'); -%>

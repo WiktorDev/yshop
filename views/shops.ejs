@@ -4,13 +4,18 @@
     <head>
         <title><%= stitle %></title>
         <meta charset="UTF-8">
+		<meta property="og:description" content="<%= desc %>" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://files.yourcraft.pl/mdbv2pro.css">
         <link rel="stylesheet" href="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/css/mdb.min.css" />
         <link rel="stylesheet" href="https://mdbootstrap.com/previews/mdb-ui-kit/sidenav/dev/css/new-prism.css" />
         <link rel="stylesheet" href="/static/css/shards.min.css">
-        <link rel="stylesheet" href="https://ivshop.pl/static/css/styles.css">
-        <!--<link rel="stylesheet" href="https://ivshop.pl/static/css/dark.css">-->
+        <link rel="stylesheet" href="/shopss.css">
+		<% rows.forEach(function(rows) { %>
+			<% if(rows.theme == "dark"){ %>
+				<link rel="stylesheet" href="https://ivshop.pl/static/css/dark.css">
+			<% } %>	
+		<% }); %>
 
     </head>
     <body>
@@ -31,23 +36,25 @@
         <div class="own-container">
 			
             <div class="widgets">
-                <div class="col-md-12">
-                    <div class="card mb-4 pb-0">
-                        <h5 class="mt-2 py-1 text-center widget-header">Status serwera</h5>
-                        <hr class="mx-2 py-0 mt-0 mb-0">
-                        <center>
-							<br>
-							<% if(status.online == true){ %>
-								<h2 style="color: green;">ONLINE</h2>
-								<p>Gracze online: <%= status.players.now %>/<%= status.players.max %></p>
-							<% } else { %>	
-							<h2 style="color: red;">OFFLINE</h2>
-							<p>Gracze online: -/-</p>
-							<% } %>
-							<br>
-                        </center>
-                    </div>
-                </div>
+				<% if(serverstatus == "true"){ %>
+					<div class="col-md-12">
+						<div class="card mb-4 pb-0">
+							<h5 class="mt-2 py-1 text-center widget-header">Status serwera</h5>
+							<hr class="mx-2 py-0 mt-0 mb-0">
+							<center>
+								<br>
+								<% if(status.online == true){ %>
+									<h2 style="color: green;">ONLINE</h2>
+									<p>Gracze online: <%= status.players.online %>/<%= status.players.max %></p>
+								<% } else { %>	
+								<h2 style="color: red;">OFFLINE</h2>
+								<p>Gracze online: -/-</p>
+								<% } %>
+								<br>
+							</center>
+						</div>
+					</div>
+				<% } %>		
                 <div class="voucher">
                     <div class="card" style="width: 20rem;">
                         <div class="card-body">

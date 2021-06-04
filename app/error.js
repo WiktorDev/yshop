@@ -1,6 +1,5 @@
 const uuid = require('uuid4');
 const fs = require("fs")
-const moment = require("moment")
 exports.error = function(err, req, res) {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const time = new Date()
