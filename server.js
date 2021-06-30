@@ -31,6 +31,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
+require('./app/auth.js')(app); 
+require('./app/index.js')(app); 
 require('./app/api.js')(app);
 require('./app/routes.js')(app); 
 require('./app/panel.js')(app); 

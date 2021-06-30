@@ -1,0 +1,15 @@
+Time: Wed Jun 30 2021 12:13:48 GMT+0200 (czas środkowoeuropejski letni)
+Executed: Process
+Type: Uncaught Exception
+Error Stack:
+TypeError: Cannot read property 'lvlupkey' of undefined
+    at Query.onResult (C:\Users\Wiktor\Desktop\apis\app\routes.js:124:59)
+    at Query.execute (C:\Users\Wiktor\Desktop\apis\node_modules\mysql2\lib\commands\command.js:30:14)
+    at PoolConnection.handlePacket (C:\Users\Wiktor\Desktop\apis\node_modules\mysql2\lib\connection.js:425:32)
+    at PacketParser.onPacket (C:\Users\Wiktor\Desktop\apis\node_modules\mysql2\lib\connection.js:75:12)
+    at PacketParser.executeStart (C:\Users\Wiktor\Desktop\apis\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Users\Wiktor\Desktop\apis\node_modules\mysql2\lib\connection.js:82:25)
+    at Socket.emit (events.js:315:20)
+    at addChunk (internal/streams/readable.js:309:12)
+    at readableAddChunk (internal/streams/readable.js:284:9)
+    at Socket.Readable.push (internal/streams/readable.js:223:10)
